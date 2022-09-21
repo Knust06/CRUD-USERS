@@ -21,10 +21,25 @@ struct EditUserView: View {
     var body: some View {
         Form {
             Section{
-                TextField("Username", text: $name)
+                TextField("Name", text: $name)
                 TextField("Sobrenome", text: $sobrenome)
                 TextField("Email", text: $email)
                 TextField("Password", text: $password)
+                
+                    .onAppear(){
+                        if let name = user.name {
+                            self.name = name
+                        }
+                        if let sobrenome = user.sobrenome {
+                            self.sobrenome = sobrenome
+                        }
+                        if let email = user.email {
+                            self.email = email
+                        }
+                        if let password = user.password {
+                            self.password = password
+                        }
+                    }//onAppear
                 
                 HStack{
                     Button("Editar"){
