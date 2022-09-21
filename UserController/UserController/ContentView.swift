@@ -8,81 +8,121 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+struct ContentView : View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order : .reverse)]) var user : FetchedResults<User>
+    @State var isAddView : Bool = false
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
+                ForEach(user) { user in
+                    NavigationLink(destination: EditUserView(user: user)) {
+                        HStack{
+                            Text(user.name!)
+                                .bold()
+                            Text(user.sobrenome!)
+                                .bold()
+                            Text(user.email!)
+                                .bold()
+                            Text(user.password!)
+                                .bold()
+                        }//HStack
+                        Spacer()
+                        Text(calcTimeSince(date : user.date!))
+                            .foregroundColor(.green)
+                            .italic()
+                        
+                    }//NavigationLink
+                    
+                }//Foreach
+                .onDelete(perform : deleteUser)
+            }//list
+            .listStyle(.plain)
+            
+        }//NavigationView
+        
+        .navigationTitle("Active Users")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing){
+                Button {
+                    isAddView.toggle()
+                }//Button
+                label: {
+                    Label("Add User", systemImage: "plus.circle")
+                }//label
+                
+            }//ToolbarItem
+            
+            ToolbarItem(placement: .navigationBarLeading){
+                EditButton()
+                
+            }//ToolbarItem
+            
+        }//toolbar
+        .sheet(isPresented: $isAddView){
+            AddUserView()
+        }//sheet
+        
+        
+    }//var body
+    
+    func deleteUser(offset: IndexSet){
+        DataController().deleteUser(offsets: offset, context : managedObjectContext, user : user)
+    }//deleteUser
+    
+}//View
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
 
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+struct UserDetailView : View {
+    var userName : String = ""
+    var userSobrenome : String = ""
+    var userEmail : String = ""
+    var userPassword : String = ""
+    var userDate : Date = Date()
+    
+    
+    var body: some View{
+        HStack{
+            VStack(alignment: .leading, spacing: 3){
+                Text(userName)
+                    .bold()
+                Text(userSobrenome)
+                    .bold()
+                Text(userEmail)
+                    .bold()
+                Text(userPassword)
+                    .bold()
+                
+            }//VStack
+            Spacer()
+            
+            Text(calcTimeSince(date:userDate))
+            
+            
+        }//HStack
+    }//var body view
+}//Struct View
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+    func calcTimeSince(date:Date) -> String {
+        let minutes = Int(-date.timeIntervalSinceNow)/60
+        let hours = minutes / 60
+        let days = hours / 24
+        
+        if minutes < 120 {
+            return "\(minutes) minutos atrás"
+        }//if minutes
+        else if (minutes >= 120 && hours < 48){
+            return "\(hours) horas atrás"
+        }//else if
+        else {
+            return "\(days) dias atrás"
+        }//else
+        
+        
+    }//calcTimeSince
+    
+   
+    
+    
 
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-}
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}

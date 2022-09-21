@@ -11,8 +11,9 @@
 		6C04484F28D92E4D00929314 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C04484E28D92E4D00929314 /* ContentView.swift */; };
 		6C04485128D92E4E00929314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C04485028D92E4E00929314 /* Assets.xcassets */; };
 		6C04485428D92E4E00929314 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C04485328D92E4E00929314 /* Preview Assets.xcassets */; };
-		6C04485628D92E4E00929314 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C04485528D92E4E00929314 /* Persistence.swift */; };
 		6C04485928D92E4E00929314 /* UserController.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C04485728D92E4E00929314 /* UserController.xcdatamodeld */; };
+		6C7B0FAE28DA58D4003FF5FA /* AddUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B0FAD28DA58D4003FF5FA /* AddUserView.swift */; };
+		6CC06FA328DA8F50006DB4C9 /* EditUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC06FA228DA8F50006DB4C9 /* EditUserView.swift */; };
 		6CCEBD9628DA2A3700287453 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEBD9528DA2A3700287453 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,8 +23,9 @@
 		6C04484E28D92E4D00929314 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6C04485028D92E4E00929314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C04485328D92E4E00929314 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		6C04485528D92E4E00929314 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		6C04485828D92E4E00929314 /* UserController.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserController.xcdatamodel; sourceTree = "<group>"; };
+		6C7B0FAD28DA58D4003FF5FA /* AddUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserView.swift; sourceTree = "<group>"; };
+		6CC06FA228DA8F50006DB4C9 /* EditUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserView.swift; sourceTree = "<group>"; };
 		6CCEBD9528DA2A3700287453 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,10 +59,11 @@
 		6C04484B28D92E4D00929314 /* UserController */ = {
 			isa = PBXGroup;
 			children = (
+				6C7B0FAD28DA58D4003FF5FA /* AddUserView.swift */,
 				6C04484C28D92E4D00929314 /* UserControllerApp.swift */,
 				6C04484E28D92E4D00929314 /* ContentView.swift */,
+				6CC06FA228DA8F50006DB4C9 /* EditUserView.swift */,
 				6C04485028D92E4E00929314 /* Assets.xcassets */,
-				6C04485528D92E4E00929314 /* Persistence.swift */,
 				6CCEBD9428DA290700287453 /* DataModel */,
 				6C04485228D92E4E00929314 /* Preview Content */,
 			);
@@ -155,10 +158,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CCEBD9628DA2A3700287453 /* DataController.swift in Sources */,
-				6C04485628D92E4E00929314 /* Persistence.swift in Sources */,
 				6C04484F28D92E4D00929314 /* ContentView.swift in Sources */,
 				6C04485928D92E4E00929314 /* UserController.xcdatamodeld in Sources */,
+				6CC06FA328DA8F50006DB4C9 /* EditUserView.swift in Sources */,
 				6C04484D28D92E4D00929314 /* UserControllerApp.swift in Sources */,
+				6C7B0FAE28DA58D4003FF5FA /* AddUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
