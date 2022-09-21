@@ -19,24 +19,32 @@ struct ContentView : View {
                 ForEach(user) { user in
                     NavigationLink(destination: EditUserView(user: user)) {
                         HStack(alignment: .center, spacing: 10){
-                            
+                            VStack{
                                 Text(user.name!)
                                     .bold()
-                                
+                                Spacer()
                                 Text(user.sobrenome!)
                                     .bold()
+                                Spacer()
+                                Text(calcTimeSince(date : user.date!))
+                                    .foregroundColor(.green)
+                                    .italic()
+                                
+                            }
+                            VStack{
+                                
                                 
                                 Text(user.email!)
                                     .bold()
                                 
                                 Text(user.password!)
                                     .bold()
+                            }
+                                
                             
                         }//HStack
                         Spacer()
-                        Text(calcTimeSince(date : user.date!))
-                            .foregroundColor(.green)
-                            .italic()
+                        
                         
                     }//NavigationLink
                     
