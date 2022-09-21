@@ -12,7 +12,7 @@ import SwiftUI
 
 class DataController : ObservableObject {
     
-    let container = NSPersistentContainer(name: "User")
+    let container = NSPersistentContainer(name: "UserController")
     
     init(){
         container.loadPersistentStores{description, error in

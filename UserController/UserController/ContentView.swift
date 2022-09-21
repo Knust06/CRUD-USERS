@@ -18,15 +18,20 @@ struct ContentView : View {
             List {
                 ForEach(user) { user in
                     NavigationLink(destination: EditUserView(user: user)) {
-                        HStack{
-                            Text(user.name!)
-                                .bold()
-                            Text(user.sobrenome!)
-                                .bold()
-                            Text(user.email!)
-                                .bold()
-                            Text(user.password!)
-                                .bold()
+                        HStack(alignment: .center, spacing: 10){
+                            
+                                Text(user.name!)
+                                    .bold()
+                                
+                                Text(user.sobrenome!)
+                                    .bold()
+                                
+                                Text(user.email!)
+                                    .bold()
+                                
+                                Text(user.password!)
+                                    .bold()
+                            
                         }//HStack
                         Spacer()
                         Text(calcTimeSince(date : user.date!))
@@ -40,7 +45,7 @@ struct ContentView : View {
             }//list
             .listStyle(.plain)
             
-        }//NavigationView
+        
         
         .navigationTitle("Active Users")
         .toolbar {
@@ -64,7 +69,7 @@ struct ContentView : View {
             AddUserView()
         }//sheet
         
-        
+        }//NavigationView
     }//var body
     
     func deleteUser(offset: IndexSet){
