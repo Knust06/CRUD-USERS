@@ -24,8 +24,11 @@ struct EditUserView: View {
                 TextField("Name", text: $name)
                 TextField("Sobrenome", text: $sobrenome)
                 TextField("Email", text: $email)
+                    .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                 TextField("Password", text: $password)
-                
+                    .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                     .onAppear(){
                         if let name = user.name {
                             self.name = name
@@ -39,6 +42,7 @@ struct EditUserView: View {
                         if let password = user.password {
                             self.password = password
                         }
+                        
                     }//onAppear
                 
                 HStack{
